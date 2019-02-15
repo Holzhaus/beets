@@ -15,7 +15,6 @@
 import os
 from beets.plugins import BeetsPlugin
 from beets.dbcore import FieldQuery, types
-from beets.util.confit import NotFoundError
 
 
 class PlaylistQuery(FieldQuery):
@@ -65,7 +64,8 @@ class PlaylistQueryPlugin(BeetsPlugin):
         )
 
     def library_opened(self, lib):
-        relative_to = self.config['relative_to'].as_choice(['base', 'playlist'])
+        relative_to = self.config['relative_to'].as_choice(
+            ['base', 'playlist'])
 
         if relative_to == 'playlist':
             PlaylistQuery.relative_path = PlaylistQuery.playlist_dir
